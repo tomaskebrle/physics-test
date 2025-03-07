@@ -5,7 +5,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
 
 const PhysicsFlashcards = () => {
-  const [cards, setCards] = useState([
+  const [cards] = useState([
     // KINEMATIKA
     {
       id: 1,
@@ -246,24 +246,6 @@ const PhysicsFlashcards = () => {
     setFlipped(!flipped);
   };
 
-  const markAsKnown = () => {
-    const updatedCards = [...cards];
-    updatedCards[
-      cards.findIndex((card) => card.id === filteredCards[currentIndex].id)
-    ].known = true;
-    setCards(updatedCards);
-    nextCard();
-  };
-
-  const markAsUnknown = () => {
-    const updatedCards = [...cards];
-    updatedCards[
-      cards.findIndex((card) => card.id === filteredCards[currentIndex].id)
-    ].known = false;
-    setCards(updatedCards);
-    nextCard();
-  };
-
   const nextCard = () => {
     if (currentIndex < filteredCards.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -279,18 +261,6 @@ const PhysicsFlashcards = () => {
     } else {
       setCurrentIndex(filteredCards.length - 1);
     }
-    setFlipped(false);
-  };
-
-  const resetKnownStatus = () => {
-    const updatedCards = cards.map((card) => ({ ...card, known: false }));
-    setCards(updatedCards);
-  };
-
-  const toggleReviewMode = () => {
-    setReviewMode(!reviewMode);
-    setActiveCategory("ALL");
-    setCurrentIndex(0);
     setFlipped(false);
   };
 
